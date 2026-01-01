@@ -1,0 +1,109 @@
+/**
+ * Modern CSS customization for Docusaurus site
+ */
+
+/* Modern color palette */
+:root {
+  --ifm-color-primary: #3b82f6; /* Tailwind blue-500 */
+  --ifm-color-primary-dark: #2563eb; /* Tailwind blue-600 */
+  --ifm-color-primary-darker: #1d4ed8; /* Tailwind blue-700 */
+  --ifm-color-primary-darkest: #1e40af; /* Tailwind blue-800 */
+  --ifm-color-primary-light: #60a5fa; /* Tailwind blue-400 */
+  --ifm-color-primary-lighter: #93c5fd; /* Tailwind blue-300 */
+  --ifm-color-primary-lightest: #dbeafe; /* Tailwind blue-100 */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Modern spacing variables */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-spacing-vertical: 1.5rem;
+
+  /* Modern border radius */
+  --ifm-global-radius: 8px;
+  --ifm-button-border-radius: 6px;
+}
+
+/* Modern dark mode palette */
+[data-theme='dark'] {
+  --ifm-color-primary: #60a5fa; /* Tailwind blue-400 */
+  --ifm-color-primary-dark: #3b82f6; /* Tailwind blue-500 */
+  --ifm-color-primary-darker: #2563eb; /* Tailwind blue-600 */
+  --ifm-color-primary-darkest: #1d4ed8; /* Tailwind blue-700 */
+  --ifm-color-primary-light: #93c5fd; /* Tailwind blue-300 */
+  --ifm-color-primary-lighter: #bfdbfe; /* Tailwind blue-200 */
+  --ifm-color-primary-lightest: #dbeafe; /* Tailwind blue-100 */
+  --docusaurus-highlighted-code-line-bg: rgba(59, 130, 246, 0.2);
+}
+
+/* Modern typography improvements */
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* Modern card-style containers */
+.card {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+/* Modern button styles */
+.button {
+  border-radius: var(--ifm-button-border-radius);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+/* Improved code block styling */
+.code-block {
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+}
+
+/* Modern search bar */
+.navbar__search input {
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+}
+
+/* Responsive improvements */
+.container {
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+/* Modern footer styling */
+.footer--dark {
+  background: linear-gradient(135deg, var(--ifm-color-primary-darkest), var(--ifm-color-primary-darker));
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improved table styling */
+.markdown table {
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Better focus states for accessibility */
+.btn:focus,
+.navbar__link:focus,
+.menu__link:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}

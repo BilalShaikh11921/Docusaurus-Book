@@ -1,0 +1,8 @@
+{
+  "label": "Module 2: The Digital Twin (Gazebo & Unity)",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Create high-fidelity digital twins of humanoid robots and environments to safely train, test, and validate physical AI systems before real-world deployment."
+  }
+}

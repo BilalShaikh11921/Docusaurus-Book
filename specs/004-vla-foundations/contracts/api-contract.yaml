@@ -1,0 +1,108 @@
+# API Contract: VLA Educational Content Access
+
+## Overview
+This contract defines the interface for accessing VLA educational content within the Docusaurus-based technical book.
+
+## Endpoints
+
+### GET /api/vla-content/introduction
+**Description**: Retrieve content for the Introduction to Vision-Language-Action chapter
+
+**Response**:
+```json
+{
+  "chapterId": "vla-introduction",
+  "title": "Introduction to Vision-Language-Action",
+  "content": "Full markdown content for the introduction chapter...",
+  "sections": [
+    {
+      "id": "what-are-vla-systems",
+      "title": "What VLA Systems Are",
+      "content": "..."
+    },
+    {
+      "id": "llm-robotics-paradigm-shift",
+      "title": "Why LLMs + Robotics is a Paradigm Shift",
+      "content": "..."
+    },
+    {
+      "id": "use-cases",
+      "title": "Real-world and Simulated Use Cases",
+      "content": "..."
+    }
+  ],
+  "metadata": {
+    "estimatedReadingTime": "15 minutes",
+    "prerequisites": ["basic ML knowledge"],
+    "learningObjectives": ["explain VLA systems", "identify use cases"]
+  }
+}
+```
+
+### GET /api/vla-content/language-to-intent
+**Description**: Retrieve content for the Language to Intent chapter
+
+**Response**:
+```json
+{
+  "chapterId": "vla-language-to-intent",
+  "title": "Language to Intent",
+  "content": "Full markdown content for the language to intent chapter...",
+  "sections": [
+    {
+      "id": "natural-language-understanding",
+      "title": "Natural Language Understanding for Action",
+      "content": "..."
+    },
+    {
+      "id": "voice-to-text-overview",
+      "title": "Voice-to-text Overview",
+      "content": "..."
+    },
+    {
+      "id": "command-mapping",
+      "title": "Mapping Commands to Goals",
+      "content": "..."
+    }
+  ],
+  "metadata": {
+    "estimatedReadingTime": "20 minutes",
+    "prerequisites": ["basic ML knowledge", "VLA fundamentals"],
+    "learningObjectives": ["map language to goals", "understand command processing"]
+  }
+}
+```
+
+### GET /api/vla-content/action-pipelines
+**Description**: Retrieve content for the From Intent to Action Pipelines chapter
+
+**Response**:
+```json
+{
+  "chapterId": "vla-action-pipelines",
+  "title": "From Intent to Action Pipelines",
+  "content": "Full markdown content for the action pipelines chapter...",
+  "sections": [
+    {
+      "id": "high-level-planning",
+      "title": "High-level Planning vs Low-level Control",
+      "content": "..."
+    },
+    {
+      "id": "perception-grounding",
+      "title": "Role of Perception in Action Grounding",
+      "content": "..."
+    },
+    {
+      "id": "ros2-integration",
+      "title": "How VLA Fits into ROS 2-Style Architectures",
+      "content": "..."
+    }
+  ],
+  "metadata": {
+    "estimatedReadingTime": "25 minutes",
+    "prerequisites": ["basic ML knowledge", "VLA fundamentals", "language-to-intent concepts"],
+    "learningObjectives": ["distinguish planning from control", "understand ROS 2 integration"]
+  }
+}
+```

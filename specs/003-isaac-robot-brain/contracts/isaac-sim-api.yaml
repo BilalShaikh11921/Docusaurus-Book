@@ -1,0 +1,145 @@
+# Isaac Sim Environment API Contract
+
+## Overview
+API for managing Isaac Sim environments for humanoid robot simulation and training.
+
+## Base URL
+`http://localhost:5000` (when running locally)
+
+## Authentication
+None required for local development. For production deployments, use standard API keys.
+
+## Endpoints
+
+### Create Simulation Environment
+```
+POST /api/v1/environments
+```
+
+#### Request Body
+```json
+{
+  "name": "Humanoid Training Arena",
+  "description": "Environment for training humanoid robot navigation",
+  "robot_model": "generic_humanoid",
+  "sensors": ["rgb_camera", "depth_camera", "lidar", "imu"],
+  "domain_randomization": {
+    "lighting": true,
+    "textures": true,
+    "physics": true
+  },
+  "environment_settings": {
+    "gravity": -9.81,
+    "time_scale": 1.0
+  }
+}
+```
+
+#### Response
+```json
+{
+  "id": "env_12345",
+  "name": "Humanoid Training Arena",
+  "status": "created",
+  "created_at": "2025-12-31T10:00:00Z",
+  "simulation_url": "http://localhost:5000/sim/env_12345"
+}
+```
+
+### Get Environment Details
+```
+GET /api/v1/environments/{env_id}
+```
+
+#### Response
+```json
+{
+  "id": "env_12345",
+  "name": "Humanoid Training Arena",
+  "description": "Environment for training humanoid robot navigation",
+  "status": "running",
+  "robot_model": "generic_humanoid",
+  "sensors": ["rgb_camera", "depth_camera", "lidar", "imu"],
+  "domain_randomization": {
+    "lighting": true,
+    "textures": true,
+    "physics": true
+  },
+  "metrics": {
+    "fps": 45.2,
+    "physics_accuracy": 0.98
+  },
+  "created_at": "2025-12-31T10:00:00Z",
+  "last_accessed": "2025-12-31T10:15:30Z"
+}
+```
+
+### Run Simulation
+```
+POST /api/v1/environments/{env_id}/run
+```
+
+#### Request Body
+```json
+{
+  "duration": 60,
+  "robot_commands": [
+    {"timestamp": 0, "command": "move_forward", "value": 1.0},
+    {"timestamp": 10, "command": "turn", "value": 0.5}
+  ]
+}
+```
+
+#### Response
+```json
+{
+  "simulation_id": "sim_67890",
+  "status": "started",
+  "estimated_completion": "2025-12-31T10:02:00Z"
+}
+```
+
+### Generate Synthetic Dataset
+```
+POST /api/v1/environments/{env_id}/generate_dataset
+```
+
+#### Request Body
+```json
+{
+  "name": "Navigation Training Dataset",
+  "duration": 3600,
+  "data_types": ["rgb", "depth", "segmentation", "lidar"],
+  "annotation_types": ["2d_bounding_box", "3d_bounding_box", "semantic_segmentation"]
+}
+```
+
+#### Response
+```json
+{
+  "dataset_id": "ds_11111",
+  "name": "Navigation Training Dataset",
+  "status": "generating",
+  "estimated_completion": "2025-12-31T11:00:00Z",
+  "estimated_size_gb": 15.5
+}
+```
+
+## Error Responses
+
+All error responses follow this format:
+```json
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable error message",
+    "details": "Additional error details if applicable"
+  }
+}
+```
+
+### Common Error Codes
+- `ENVIRONMENT_NOT_FOUND`: Requested environment does not exist
+- `INSUFFICIENT_RESOURCES`: Not enough GPU/CPU resources available
+- `INVALID_CONFIGURATION`: Invalid environment configuration provided
+- `SIMULATION_ERROR`: Error occurred during simulation execution

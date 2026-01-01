@@ -1,0 +1,152 @@
+# API Contract: Educational Content Access
+
+## Overview
+This contract defines the interface for accessing educational content in the AI/Spec-Driven Technical Book with Embedded RAG Chatbot project. The contract ensures consistent access to course modules, chapters, and related resources.
+
+## Content Access Endpoints
+
+### Get Module List
+- **Endpoint**: `GET /api/modules`
+- **Description**: Retrieve a list of all available modules
+- **Response**:
+  ```json
+  {
+    "modules": [
+      {
+        "id": "module-1-robotic-nervous-system",
+        "title": "Module 1: The Robotic Nervous System (ROS 2)",
+        "description": "Introduction to ROS 2 as the nervous system of humanoid robots",
+        "chapters_count": 3,
+        "learning_outcomes": [
+          "Explain ROS 2 architecture and its role in humanoid robotics",
+          "Build and connect ROS 2 nodes using Python (rclpy)",
+          "Describe and author URDF models for humanoid robots",
+          "Bridge AI agents to robot controllers via ROS middleware"
+        ]
+      }
+    ]
+  }
+  ```
+
+### Get Module Details
+- **Endpoint**: `GET /api/modules/{module_id}`
+- **Description**: Retrieve detailed information about a specific module
+- **Path Parameters**:
+  - `module_id`: The unique identifier for the module
+- **Response**:
+  ```json
+  {
+    "id": "module-1-robotic-nervous-system",
+    "title": "Module 1: The Robotic Nervous System (ROS 2)",
+    "description": "Introduction to ROS 2 as the nervous system of humanoid robots—how computation, communication, and control flow between software intelligence and physical actuators.",
+    "chapters": [
+      {
+        "id": "ros2-overview",
+        "title": "ROS 2 as a Robotic Nervous System",
+        "position": 1,
+        "content_url": "/docs/module-1-robotic-nervous-system/ros2-overview"
+      },
+      {
+        "id": "rclpy-agents",
+        "title": "Building ROS 2 Nodes with Python (rclpy)",
+        "position": 2,
+        "content_url": "/docs/module-1-robotic-nervous-system/rclpy-agents"
+      },
+      {
+        "id": "urdf-humanoids",
+        "title": "URDF Models for Humanoid Robots",
+        "position": 3,
+        "content_url": "/docs/module-1-robotic-nervous-system/urdf-humanoids"
+      }
+    ],
+    "audience": [
+      "AI engineers",
+      "robotics students",
+      "software developers transitioning from digital AI to embodied/physical AI systems"
+    ]
+  }
+  ```
+
+### Get Chapter Content
+- **Endpoint**: `GET /api/modules/{module_id}/chapters/{chapter_id}`
+- **Description**: Retrieve the content of a specific chapter
+- **Path Parameters**:
+  - `module_id`: The unique identifier for the module
+  - `chapter_id`: The unique identifier for the chapter
+- **Response**:
+  ```json
+  {
+    "id": "ros2-overview",
+    "title": "ROS 2 as a Robotic Nervous System",
+    "module_id": "module-1-robotic-nervous-system",
+    "content": "# Chapter 1: ROS 2 as a Robotic Nervous System\n\n## What is ROS 2?\n\nROS 2 (Robot Operating System 2) is a flexible framework for writing robot software...",
+    "position": 1,
+    "learning_objectives": [
+      "Understand the fundamental concepts of ROS 2",
+      "Explain how ROS 2 differs from ROS 1",
+      "Diagram a basic ROS 2 system showing nodes, topics, and message flow"
+    ],
+    "next_chapter": {
+      "id": "rclpy-agents",
+      "title": "Building ROS 2 Nodes with Python (rclpy)"
+    },
+    "previous_chapter": null
+  }
+  }
+  ```
+
+### Search Content
+- **Endpoint**: `POST /api/search`
+- **Description**: Search across all educational content
+- **Request**:
+  ```json
+  {
+    "query": "ROS 2 architecture",
+    "filters": {
+      "module_id": "module-1-robotic-nervous-system",
+      "chapter_id": null
+    },
+    "limit": 10
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "results": [
+      {
+        "id": "search-result-1",
+        "title": "ROS 2 Architecture Overview",
+        "content_preview": "ROS 2 (Robot Operating System 2) is a flexible framework for writing robot software...",
+        "module_id": "module-1-robotic-nervous-system",
+        "chapter_id": "ros2-overview",
+        "url": "/docs/module-1-robotic-nervous-system/ros2-overview",
+        "relevance_score": 0.95
+      }
+    ],
+    "total_results": 1,
+    "query_time_ms": 12
+  }
+  ```
+
+## Error Responses
+All endpoints follow the standard error response format:
+```json
+{
+  "error": {
+    "code": "RESOURCE_NOT_FOUND",
+    "message": "The requested resource was not found",
+    "details": "Module with id 'nonexistent-module' does not exist"
+  }
+}
+```
+
+## Common Headers
+- `Content-Type`: `application/json`
+- `Accept`: `application/json`
+- `Authorization`: Bearer token (if authentication is required)
+
+## Status Codes
+- `200`: Success
+- `400`: Bad Request (invalid parameters)
+- `404`: Resource Not Found
+- `500`: Internal Server Error
