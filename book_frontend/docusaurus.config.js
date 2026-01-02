@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'AI/Spec-Driven Technical Book',
+  title: 'Physical AI & Humanoid Robotics',
   tagline: 'Bridging AI and Robotics: The ROS 2 Nervous System',
   favicon: 'img/favicon.ico',
 
@@ -68,7 +68,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'AI/Spec-Driven Technical Book',
+        title: 'ROS 2 Nervous System',
         logo: {
           alt: 'Robotics Educational Platform Logo',
           src: 'img/logo.svg',
